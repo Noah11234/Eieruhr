@@ -1,0 +1,23 @@
+body{
+    background-color: #262626;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+.ei-bild{
+   
+    height: 10%;
+    
+}
+
+.margin-top{
+    margin-top: 100px;
+}
+
+.timer{
+    font-size: 60px;
+    color: white;
+    font-family: 'roboto' , sans-serif;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=E, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <title>Document</title>
+
+    <style>
+        body{
+    background-color: #262626;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.ei-bild{   
+    height: 10%;
+}
+.margin-top{
+    margin-top: 100px;
+}
+.timer{
+    font-size: 60px;
+    color: white;
+    font-family: 'roboto' , sans-serif;
+}
+
+
+
+/* anderer code */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+.wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background:  #262626;
+  /* background: linear-gradient(375deg, #2ede98, #1cc7d0); */
+  /* clip-path: circle(25px at calc(0% + 45px) 45px); */
+  clip-path: circle(25px at calc(100% - 45px) 45px);
+  transition: all 0.3s ease-in-out;
+}
+#active:checked ~ .wrapper{
+  clip-path: circle(75%);
+}
+.menu-btn{
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  /* left: 20px; */
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  background: white;
+  /* background: linear-gradient(375deg, #2ede98, #1cc7d0); */
+  transition: all 0.9s ease-in-out;
+}
+#active:checked ~ .menu-btn{
+  background: #fff;
+  color: #4158d0;
+}
+#active:checked ~ .menu-btn i:before{
+  content: "\f00d";
+}
+.wrapper ul{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  list-style: none;
+  text-align: center;
+}
+.wrapper ul li{
+  margin: 15px 0;
+}
+.wrapper ul li a{
+  color: none;
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: 500;
+  padding: 3px;
+  color: #fff;
+  position: relative;
+  line-height: 50px;
+  transition: all 0.3s ease;
+}
+.wrapper ul li a:after{
+  position: absolute;
+  content: "";
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  left: 0;
+  border-radius: 50px;
+  transform: scaleY(0);
+  z-index: -1;
+  transition: transform 0.3s ease;
+}
+.wrapper ul li a:hover:after{
+  transform: scaleY(1);
+}
+.wrapper ul li a:hover{
+  color: #4158d0;
+}
+input[type="checkbox"]{
+  display: none;
+}
+
+
+
+
+    </style>
+
+    <script>
+            let alarm = new Audio ('alarm.mp3');
+            let timerStarted = false;
+
+        function startTimer(){
+            if(!timerStarted) {
+            let startTime = new Date().getTime();
+            let fiveMinutes = 1000 *60  * 6;
+            let endTime = startTime + fiveMinutes;
+
+            setInterval(function() {
+                let timeLeft = endTime - new Date().getTime();
+
+                if (timeLeft > 0) {
+                let minutes = timeLeft / (1000 * 60);
+                minutes = Math.floor(minutes);
+                let seconds = (timeLeft / 1000) % 60;
+                seconds = Math.round(seconds);
+                seconds = ('0' + seconds).slice(-2);
+                let text = '0' + minutes + ' : ' + seconds;
+                timer.innerHTML = text;
+                } else {
+                    alarm.play();
+                    timer.innerHTML = '00 : 00';
+
+                }
+            },1000);
+            timerStarted = true;
+          }
+    }
+    </script>
+
+</head>
+<body>
+
+    <input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
+    <div class="wrapper">
+        
+        <ul>
+       
+          <li><a href="index(5min).html">Weich (5 min)</a></li>
+          <li><a href="index(6min).html">Mittel (6 min)</a></li>
+          <li><a href="index(8min).html">Hart (8 min)</a></li>
+          
+        </ul>
+      </div>
+
+
+   
+    <div class="center margin-top ei-bild">
+        <img src="img/egg2.PNG" >
+    </div>
+    
+    <div class="center margin-top timer" id="timer">
+       06:00
+    </div>
+
+    <div class="center margin-top">
+        <img onclick="startTimer()" src="img/button.png" >
+    </div>
+
+    
+</body>
+
+</html>
